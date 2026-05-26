@@ -4,11 +4,10 @@ import os
 def move_file(command: str) -> None:
     parts = command.split()
 
-    if parts[0] != "mv":
+    if len(parts) != 3 or parts[0] != "mv":
         return
 
-    source = parts[1]
-    destination = parts[2]
+    _, source, destination = parts
 
     if destination.endswith("/"):
         destination = destination + os.path.basename(source)
@@ -21,7 +20,7 @@ def move_file(command: str) -> None:
             if not current_path:
                 current_path = part
             else:
-                current_path = current_path + "/" + part
+                current_path = os.path.join(current_path, part)
             if not os.path.exists(current_path):
                 os.mkdir(current_path)
 
