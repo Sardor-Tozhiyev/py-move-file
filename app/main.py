@@ -22,6 +22,6 @@ def move_file(command: str) -> None:
             else:
                 current_path = os.path.join(current_path, part)
             if not os.path.exists(current_path):
-                os.mkdir(current_path)
+                os.makedirs(current_path, exist_ok=True)
 
     os.rename(source, destination)
